@@ -1,5 +1,5 @@
 from app import babel
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask_babel import gettext
 from config import LANGUAGES
 
