@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row justify-content-md-center relative-vertical-padding-10">
+    <div class="col-sm-6">
+      <form class="form form-auth" action="" method="post" name="signup">
+        {{ form.hidden_tag() }}
+        <h2>{{title}}</h2>
+        <fieldset class="form-group has-danger">
+          <label for="email">{{ _('Email address') }}</label>
+          {{ form.email(class="form-control form-control-lg",id="email") }}
+          {% for error in form.email.errors %} 
+          <small class="form-control-feedback">{{ error }}</small> 
+          {% endfor %}
+        </fieldset>
+        <fieldset class="form-group has-danger">
+          <label for="password">{{ _('Password') }}</label>
+          {{ form.password(class="form-control form-control-lg",id="password") }}
+          {% for error in form.password.errors %} 
+          <small class="form-control-feedback">{{ error }}</small> 
+          {% endfor %}
+        </fieldset>
+        <p>{{ form.remember_me }} {{ _('Remember Me') }}</p>
+
+        <button type="submit" class="btn btn-primary">{{ _('Sign In') }}</button>
+        <div>
+          <a href="{{ url_for('auth.signup') }}" class="text-muted">{{ _('Need an account?') }}</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

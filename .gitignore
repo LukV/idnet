@@ -1,4 +1,4 @@
-# Copied from https://github.com/blogmv/backend-python-flask/blob/master/.gitignore
+µ# Copied from https://github.com/blogmv/backend-python-flask/blob/master/.gitignore
 
 ### PyCharm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
@@ -90,3 +90,6 @@ target/
 gaenv_lib/
 appengine_config.py
 
+# custom idnet
+app.db
+db_repository/

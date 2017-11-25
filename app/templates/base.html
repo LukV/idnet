@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% if title %}
+    <title>{{ title }} - idnet</title>
+    {% else %}
+    <title>{{ _('Welcome to idnet') }}</title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css', _external=True) }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/idnet.css', _external=True) }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple-line-icons.css', _external=True) }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename = 'ico/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename = 'ico/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename = 'ico/favicon-16x16.png') }}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:700|Source+Sans+Pro" rel="stylesheet">
+ </head>
+  <body>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissable" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <nav class="navbar navbar-expand-lg navbar-light static-top sb-navbar">
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">mono</a>
+            <button class="navbar-toggler navbar-toggler-right" 
+                type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" 
+                aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto"></ul>
+                <ul class="navbar-nav">
+		    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+			<a class="nav-link">{{ current_user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">{{ _('Log out') }}</a>
+                    </li>
+		    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.login') }}">{{ _('Log in') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">or</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.signup') }}">{{ _('Sign up') }}</a>
+                    </li>
+		    {% endif %}
+                </ul>
+            </div>
+    </nav>
+    <main role="main" class="container">
+        {% block content %}{% endblock %}
+    </main>
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js', _external=True) }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js', _external=True) }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js', _external=True) }}"></script>
+  </body>
+</html>

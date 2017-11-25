@@ -1,0 +1,76 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #F5F5F5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+}
+
+.alert {
+    margin-bottom:0px;
+}
+
+.navbar {
+    background-color: white !important;
+}
+
+.navbar-brand {
+    font-family: 'Roboto Slab', serif;
+    color: #FFBD3B !important;
+    font-size: 44px;
+}
+
+.jumbotron {
+    background-color: transparent;
+}
+
+.small-caps {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    color: #AEB5BB;
+    margin: 0 0 10px 0;
+    padding: 0;
+    letter-spacing: 0.9px;
+}
+
+.lead .btn {
+    margin-top: 5px;
+}
+
+.lead .btn-primary {
+    margin-right: 15px;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.relative-vertical-padding-10 {
+    padding-top: 10%;
+}
+
+.form-auth label {
+	color: dimgrey;
+	margin-bottom: 4px;
+}
+.form-auth input {
+	border-radius: 1px;
+}
+.form-auth button {
+	border-radius: 2px;
+	padding: 15px 40px;
+	margin-top: 20px;
+}
+.form-auth h2 {
+	margin-bottom:20px;
+}
+.form-auth .username {
+	width: 50%;
+}
+.has-danger .form-control-feedback {
+	color: #d9534f;
+}
+
+

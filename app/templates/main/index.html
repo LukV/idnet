@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <h2 class="small-caps">Introducing the GDPR</h2>
+  <h1 class="display-3">You're in control</h1>
+  <p class="lead">The European Union has joined forces with companies and organisations - 
+	everyone really - that hold data on you. Banks, social media Facebook and Google, 
+	your city administration, hospital will now gladly give you access to the personal 
+	data they have on you. That is tons of data. You will probably drown. 
+	Use mono to vizualize what the web has on you.</p>
+  <hr class="my-4">
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{{ url_for('auth.signup') }}" role="button">{{ _('Sign up') }} &raquo;</a>
+    <a class="btn btn-outline-primary btn-lg" href="#" role="button">Watch how it works</a>
+  </p>
+  <p><a href="{{ url_for('auth.login') }}">I already have an account</a></p>
+</div>
+{% endblock %}
