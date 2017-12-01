@@ -1,13 +1,12 @@
-from flask import render_template, request, redirect, flash, url_for
-from flask_login import login_required, login_user, logout_user
+from flask import render_template, request, redirect, flash, url_for, g
+from flask_login import login_required, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from flask_babel import gettext
-from config import LANGUAGES
 
-from app import babel, db
+from app import babel, db, lm, app
 from app.auth.forms import LoginForm, SignupForm
-from app.auth.models import User
+from app.auth.models import User, Role, Status
 from app.auth import auth
 
 @auth.route('/', methods=["GET", "POST"])
@@ -15,7 +14,9 @@ from app.auth import auth
 @auth.route('/signin', methods=["GET", "POST"])
 def login():
 	# TODO translations
-	# TODO remember_me
+
+	if g.user is not None and g.user.is_authenticated:
+		return redirect(url_for('main.secret'))
 
 	form = LoginForm(request.form)
 
@@ -24,7 +25,7 @@ def login():
 
 		if user is not None and user.verify_password(form.password.data):
 			login_user(user, form.remember_me.data)
-			return redirect(request.args.get('next') or url_for('main.index'))
+			return redirect(request.args.get('next') or url_for('main.dashboard'))
 
 		flash(gettext('Invalid username or password.'))
 
@@ -48,8 +49,8 @@ def signup():
 		user = User(username, email)
 		user.password = password
 		user.password_hash
-		user.role = 2
-		user.status = 1
+		user.role = Role.USER
+		user.status = Status.ACTIVE
 		db.session.add(user)
 		db.session.commit()
 		
@@ -66,3 +67,11 @@ def logout():
 	logout_user()
 	flash(gettext('You have been logged out.'))
 	return redirect(url_for('main.index'))
+
+@lm.user_loader
+def load_user(id):
+	return User.query.get(int(id))
+
+@app.before_request
+def before_request():
+	g.user = current_user

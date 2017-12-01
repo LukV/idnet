@@ -1,4 +1,6 @@
 Babel==2.5.1
+beautifulsoup4==4.5.3
+blinker==1.4
 boto==2.40.0
 certifi==2017.7.27.1
 chardet==3.0.4
@@ -9,8 +11,11 @@ duplicity==0.7.6
 enum34==1.1.6
 Flask==0.12.2
 Flask-Babel==0.11.2
+Flask-Login==0.4.0
+Flask-Mail==0.9.1
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
+html5lib==0.999999999
 idna==2.6
 ipaddress==1.0.17
 itsdangerous==0.24
@@ -18,8 +23,10 @@ Jinja2==2.10
 keyring==10.3.1
 keyrings.alt==2.2
 lockfile==0.12.2
+lxml==3.7.3
 MarkupSafe==1.0
 ndg-httpsclient==0.4.2
+numpy==1.12.1
 pbr==3.1.1
 psutil==5.0.1
 pyasn1==0.1.9
@@ -31,6 +38,7 @@ python-cloudfiles==1.7.10
 pytz==2017.3
 pyxdg==0.25
 requests==2.18.4
+scour==0.32
 SecretStorage==2.3.1
 six==1.11.0
 SQLAlchemy==1.1.15
@@ -38,5 +46,6 @@ sqlalchemy-migrate==0.11.0
 sqlparse==0.2.4
 Tempita==0.5.2
 urllib3==1.22
+webencodings==0.5
 Werkzeug==0.12.2
 WTForms==2.1

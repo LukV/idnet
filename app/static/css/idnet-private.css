@@ -1,0 +1,31 @@
+.navbar {
+    background-color: #FFBD3B !important;
+}
+
+.navbar-brand {
+    font-family: 'Roboto Slab', serif;
+    color: white !important;
+    font-size: 44px;
+}
+
+a.nav-link {
+    color: white !important;
+    font-weight: bold;
+}
+
+.navbar-2 {
+  background-color: white;
+  border-bottom: 1px solid #DEDEDE;
+  padding: 17px 16px 12px 16px;
+}
+
+.navbar-2 h1 {
+  margin: 0px;
+  padding: 0px;
+  font-size: 28px;
+}
+
+.icon-controller-button {
+  padding-right: 5px;
+}
+

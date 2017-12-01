@@ -9,7 +9,7 @@
         <fieldset class="form-group has-danger">
           <label for="username">{{ _('First name') }}</label>
           {{ form.username(class="form-control form-control-lg username",id="username") }}
-	  {% for error in form.username.errors %} 
+				  {% for error in form.username.errors %} 
           <small class="form-control-feedback">{{ error }}</small> 
           {% endfor %}
         </fieldset>
@@ -27,7 +27,8 @@
           <small class="form-control-feedback">{{ error }}</small> 
           {% endfor %}
         </fieldset>
-        <div class="text-muted">{{ _('Signing up for a mono account means you agree to the Privacy Policy and Terms of Service.') }}</div>
+        <div class="text-muted">Signing up for a mono account means you agree 
+					to the <a href="{{ url_for('main.privacy') }}">Privacy Policy</a>.</div>
         <button type="submit" class="btn btn-primary">{{ _('Create account >') }}</button>
         <div>
           <a href="{{ url_for('auth.login') }}" class="text-muted">{{ _('Already have an account?') }}</a>

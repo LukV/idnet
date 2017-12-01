@@ -23,22 +23,6 @@ $ source env/bin/activate
 
 ### Install packages
 ```
-$ pip install flask
-$ pip install flask-babel
-$ pip install flask-sqlalchemy
-$ pip install sqlalchemy-migrate
-$ pip install flask-wtf
-$ pip install flask-login
-```
-
-### Freeze current state
-```
-$ pip freeze > requirements.txt
-```
-
-See the list of installed packages without the requirements format using “pip list”. Later it will be easier for a different developer (or you, if you need to re-create the environment) to install the same packages using the same versions:
-
-```
 $ pip install -r requirements.txt
 ```
 
@@ -71,11 +55,37 @@ $ python
 >>> u =  models.User('[your username]','[your email]')
 >>> u.password = [your password]
 >>> u.password_hash
->>> u.role = 1   # 1 = admin
->>> u.status = 1 # 1 = active
+>>> u.role = models.Role.ADMIN
+>>> u.status = models.Status.ACTIVE
 >>> db.session.add(u)
 >>> db.session.commit()
->>> print db.session.query(models.User.id).count() 
+>>> models.User.query.all() 
+>>> 
+```
+
+### Add gmail credentials to your environment
+Assuming gmail is your test e-mail server
+```
+$ export MAIL_USERNAME=[gmail username]
+$ export MAIL_PASSWORD=[gmail password]
+```
+Let's see whether it works:
+```
+$ python
+>>> from config import MAIL_USERNAME
+>>> from flask_mail import Message
+>>> from app import app
+>>> print MAIL_USERNAME
+>>> msg = Message('test subject', sender='you@example.com', recipients=['[RECIPIENT EMAIL]'])
+>>> msg.body='test body'
+>>> with app.app_context():
+>>> ...mail.send(msg)
+>>> 
+```
+
+### Run the application!
+```
+$ python ./run.py
 ```
 
 ### Stop virtualenvironment
@@ -84,9 +94,10 @@ $ deactivate
 ```
 
 ## v0.2 silky sifaka
-* Introduced template inheritance
+* added functionality to sign up and login with username (email) and password
+* introduced template inheritance
 * added flask-sqlalchemy and sqlalchemy-migrate for database connectivity
 * added flask-wtf for web forms
-* added functionality to sign up and login with username (email) and password
+* added flask-mail for e-mail confirmation
 * added Bootstrap 
-* introduced endangered primates for versioning :-)
+* introduced endangered primates for version naming

@@ -17,7 +17,6 @@ lm.session_protection = 'strong'
 lm.login_view = 'auth.login'
 lm.init_app(app)
 
-
 @app.errorhandler(404)
 def not_found(error):
 	return render_template('404.html'), 404
@@ -26,11 +25,13 @@ def not_found(error):
 def internal_server_error(e):
 	return render_template('500.html'), 500
 
-from app.main.controllers import main as main_module
-from app.auth.controllers import auth as auth_module
+from app.main.controllers  import main  as main_module
+from app.auth.controllers  import auth  as auth_module
+from app.admin.controllers import admin as admin_module
 
 # Register blueprint(s)
 app.register_blueprint(main_module)
 app.register_blueprint(auth_module)
+app.register_blueprint(admin_module)
 
 from auth import models

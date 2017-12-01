@@ -1,7 +1,7 @@
-from app import db
-from werkzeug.security import generate_password_hash, check_password_hash
+from app import db, lm
+from flask import current_app
 from flask_login import UserMixin
-from app import lm
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class Base(db.Model):
 
@@ -20,8 +20,8 @@ class User(UserMixin, Base):
 	email         = db.Column(db.String(128), nullable=False, unique=True, index=True)
 	password_hash = db.Column(db.String(128), nullable=False)
 
-	role     = db.Column(db.SmallInteger, nullable=True)
-	status   = db.Column(db.SmallInteger, nullable=True)
+	role          = db.Column(db.SmallInteger, nullable=True)
+	status        = db.Column(db.SmallInteger, nullable=True)
 
 	def __init__(self, username, email):
 		self.username = username
@@ -29,6 +29,12 @@ class User(UserMixin, Base):
 
 	def __repr__(self):
 		return '<User %r>' % (self.username)  
+		
+	def is_administrator(self):
+		if self.role == Role.ADMIN:
+			return True
+		else:
+			return False
 
 	@property
 	def password(self):
@@ -41,7 +47,15 @@ class User(UserMixin, Base):
 	def verify_password(self, password):
 		return check_password_hash(self.password_hash, password)
 		
-		
 	@lm.user_loader
 	def load_user(user_id):
 		return User.query.get(int(user_id))
+
+class Role:
+	ADMIN = 1
+	USER = 2
+	
+class Status:
+	ACTIVE = 1
+	INACTIVE = 2
+

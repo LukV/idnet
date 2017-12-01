@@ -1,0 +1,9 @@
+.navbar {
+    background-color: white !important;
+}
+
+.navbar-brand {
+    font-family: 'Roboto Slab', serif;
+    color: #FFBD3B !important;
+    font-size: 44px;
+}

@@ -4,12 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% if title %}
-    <title>{{ title }} - idnet</title>
+    <title>{{ title }} - mono</title>
     {% else %}
     <title>{{ _('Welcome to idnet') }}</title>
     {% endif %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css', _external=True) }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/idnet.css', _external=True) }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css', _external=True) }}">
+    {% if current_user.is_authenticated %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/idnet-private.css', _external=True) }}">
+    {% else %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/idnet-public.css', _external=True) }}">
+    {% endif %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/simple-line-icons.css', _external=True) }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename = 'ico/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename = 'ico/favicon-32x32.png') }}">
@@ -38,11 +44,19 @@
                 <ul class="navbar-nav mr-auto"></ul>
                 <ul class="navbar-nav">
 		    {% if current_user.is_authenticated %}
+		    {% if current_user.is_administrator() %}
                     <li class="nav-item">
-			<a class="nav-link">{{ current_user.username }}</a>
+                        <a class="nav-link" href="{{ url_for('admin.index') }}">{{ _('Admin') }}</a>
                     </li>
+		    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.logout') }}">{{ _('Log out') }}</a>
+                    </li>
+                    <li class="nav-item">
+			<a class="nav-link">
+                          <i class="fa fa-user"></i>
+                          hi, {{ current_user.username }}
+                        </a>
                     </li>
 		    {% else %}
                     <li class="nav-item">
@@ -58,7 +72,7 @@
                 </ul>
             </div>
     </nav>
-    <main role="main" class="container">
+    <main role="main">
         {% block content %}{% endblock %}
     </main>
     <script src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js', _external=True) }}"></script>

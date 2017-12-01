@@ -1,7 +1,6 @@
 from app import babel
 from app.auth.models import User
 from flask_babel import gettext
-from config import LANGUAGES
 from flask_wtf import Form
 from wtforms import StringField, BooleanField, PasswordField, ValidationError
 from wtforms.validators import Required, Email, Length
